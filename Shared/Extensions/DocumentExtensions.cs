@@ -61,6 +61,20 @@ namespace Torsion.Extensions
             }
             return null;
         }
+#else
+        public static ViewSheet GetSheetByNumber(this Document document, string sheetNumber)
+        {
+            ParameterValueProvider pvpNumber = new ParameterValueProvider(new ElementId(BuiltInParameter.SHEET_NUMBER));
+            FilterStringRuleEvaluator evalNumber = new FilterStringEquals();
+            FilterRule numberRule = new FilterStringRule(pvpNumber, evalNumber, sheetNumber);
+            ElementParameterFilter numberFilter = new ElementParameterFilter(numberRule);
+
+            if(new FilteredElementCollector(document).OfClass(typeof(ViewSheet)).WherePasses(numberFilter).FirstOrDefault() is ViewSheet sheet)
+            {
+                return sheet;
+            }
+            return null;
+        }
 #endif
     }
 }

@@ -16,7 +16,7 @@ namespace Torsion.Updaters
         /// Use this Method to Initialize and return the UpdaterId for registration and Enabling / Disabling the updater
         /// The GUID here is unique to this updater and should be regenerated for any additional Updaters
         /// </summary>
-        /// <param name="appId"></param>
+        /// <param name="appId"><see cref="Autodesk.Revit.DB.AddInId"/></param>
         public ViewSheetUpdater(AddInId appId)
         {
             applicationId = appId;
@@ -26,7 +26,7 @@ namespace Torsion.Updaters
         /// <summary>
         /// This is where all of the work is done, and the Data is the information supplied by Revit when new elemnts are created
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data"><see cref="Autodesk.Revit.DB.UpdaterData"/></param>
         public void Execute(UpdaterData data)
         {
             //Get the current Document
@@ -56,7 +56,7 @@ namespace Torsion.Updaters
         /// These attitional methods are all required for each updater
         /// This can be quereyed for Task dialogs or error messages
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="string"/></returns>
         public string GetAdditionalInformation()
         {
             return "Check to see when Sheets are added";
@@ -65,7 +65,7 @@ namespace Torsion.Updaters
         /// <summary>
         /// Set the ChangePriority of the Updater so that it will narrow the items it is "watching"
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="ChangePriority"/></returns>
         public ChangePriority GetChangePriority()
         {
             return ChangePriority.Views;
@@ -74,7 +74,7 @@ namespace Torsion.Updaters
         /// <summary>
         /// Used to Retrieve the Static UpdaterId
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="Autodesk.Revit.DB.UpdaterId"/></returns>
         public UpdaterId GetUpdaterId()
         {
             return updaterId;
@@ -83,7 +83,7 @@ namespace Torsion.Updaters
         /// <summary>
         /// Sets the Updater Name to be called or shown for Task Dialogs
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="string"/></returns>
         public string GetUpdaterName()
         {
             return "Torsion Tools Sheet Information Updater";

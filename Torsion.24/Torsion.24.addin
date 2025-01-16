@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>&#169;Torsion Tools</Name>
+    <Assembly>Torsion.24.dll</Assembly>
+    <AddInId>{A04C28AA-E370-4E81-84A4-E971E3C91D5B}</AddInId>
+    <FullClassName>Torsion.App</FullClassName>
+    <ClientId>{9CED73F9-9981-466F-9E37-EE7787B22D96}</ClientId>
+    <VendorId>Torsion Tools</VendorId>
+    <VendorDescription>Torsion Tools, www.torsiontools.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

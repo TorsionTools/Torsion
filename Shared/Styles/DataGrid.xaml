@@ -1,0 +1,50 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ControlDefaults.xaml"/>
+        <ResourceDictionary Source="Colors.xaml"/>
+        <ResourceDictionary Source="Fonts.xaml"/>
+        <ResourceDictionary Source="Text.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type DataGrid}" x:Key="DefaultDataGrid" BasedOn="{StaticResource DefaultStyle}">
+        <Setter Property="BorderBrush" Value="{StaticResource TorsionBlueBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
+        <Setter Property="Margin" Value="0 5 0 5"/>
+        <Setter Property="Padding" Value="0,4,0,4"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
+        <Setter Property="Background" Value="{StaticResource TorsionWhiteBrush}"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="CanUserSortColumns" Value="True"/>
+        <Setter Property="CanUserReorderColumns" Value="True"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
+        <Setter Property="RowHeaderWidth" Value="0"/>
+        <Setter Property="GridLinesVisibility" Value="None"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="8"/>
+            </Style>
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource TorsionGreyBrush}"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Padding" Value="5,5,5,0"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TorsionGreenBrush}"/>
+                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                <Setter Property="Height" Value="25"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style>
+            <Style TargetType="DataGridCell">
+                <Setter Property="BorderThickness" Value=".2"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TorsionGreyBrush}"/>
+            </Style>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource TorsionLightGrey}"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource TorsionWhite}"/>
+        </Style.Resources>
+    </Style>
+
+</ResourceDictionary>

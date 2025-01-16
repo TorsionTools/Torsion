@@ -1,0 +1,22 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="TorsionBlue">#69CCE0</Color>
+    <SolidColorBrush x:Key="TorsionBlueBrush" Color="{StaticResource TorsionBlue}"/>
+
+    <Color x:Key="TorsionGreen">#9BAD22</Color>
+    <SolidColorBrush x:Key="TorsionGreenBrush" Color="{StaticResource TorsionGreen}"/>
+
+    <Color x:Key="TorsionBlack">#000000</Color>
+    <SolidColorBrush x:Key="TorsionBlackBrush" Color="{StaticResource TorsionBlack}"/>
+
+    <Color x:Key="TorsionGrey">#5F6062</Color>
+    <SolidColorBrush x:Key="TorsionGreyBrush" Color="{StaticResource TorsionGrey}"/>
+
+    <Color x:Key="TorsionWhite">#FFFFFF</Color>
+    <SolidColorBrush x:Key="TorsionWhiteBrush" Color="{StaticResource TorsionWhite}"/>
+
+    <Color x:Key="TorsionLightGrey">#aaabad</Color>
+    <SolidColorBrush x:Key="TorsionLightGreyBrush" Color="{StaticResource TorsionLightGrey}"/>
+</ResourceDictionary>

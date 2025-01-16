@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>652b0525-40b6-4ea2-a9e4-22df669eeb4c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Torsion</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Abstracts\ExternalCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Abstracts\ExternalCommandAvailability.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\About.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\HelloWorld.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DocumentExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ElementIdExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ParameterExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\RibbonExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MappedParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ribbon\Ribbon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Ribbon\RibbonAvailability.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Updaters\ViewSheetUpdater.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\AppVars.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\BaseModelUtilities.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\RelayCommandParam.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Content.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\GetHandle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Dialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Parameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutVM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Images\SquareT.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\Icon.ico" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\Button100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\ChangeViewReference100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\ComponentInfo100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\CreateSpaces100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\FindReplace100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\LinkedView100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\LinkedViewUpdate100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\MultipleSharedParameters100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\SheetLegendToMultiple100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\SheetScheduleToMultiple100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\SheetSelection100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\SheetTitleblockKeyPlan100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\SheetViewRefSheet100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\SquareT100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\ToUpper100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\ViewDeleteUnplaced100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\ViewLegendCopy100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\ViewScheduleCopy100x100.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Images\Warning100x100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)JSON\Parameters.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\CheckBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\ControlDefaults.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Text.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+</Project>

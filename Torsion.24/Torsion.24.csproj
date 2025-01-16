@@ -125,7 +125,7 @@
     <Error Condition="!Exists('..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetPath) "C:\users\spage\Code\References\" /y
-xcopy "C:\users\spage\Code\References\$(TargetFileName)" "C:\ProgramData\Autodesk\Revit\Addins\2024\Torsion\" /y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetPath) "D:\Code\References" /y
+xcopy "D:\Code\References\$(TargetFileName)" "C:\ProgramData\Autodesk\Revit\Addins\2024\Torsion\" /y</PostBuildEvent>
   </PropertyGroup>
 </Project>

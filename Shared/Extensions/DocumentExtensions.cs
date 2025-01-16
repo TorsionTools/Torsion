@@ -37,6 +37,7 @@ namespace Torsion.Extensions
                 return collector.ToElements();
             }
         }
+#if NET8_0_OR_GREATER
         /// <summary>
         /// Retrieve a <see cref="ViewSheet"/> with the specified Sheet Number and Sheet Collection Name
         /// </summary>
@@ -60,5 +61,6 @@ namespace Torsion.Extensions
             }
             return null;
         }
+#endif
     }
 }

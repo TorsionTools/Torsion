@@ -48,7 +48,7 @@
 	<Import Project="..\Shared\Shared.projitems" Label="Shared" />
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="xcopy $(TargetPath) &quot;D:\Code\References\&quot; /y&#xD;&#xA;xcopy &quot;D:\Code\References\$(TargetFileName)&quot; &quot;C:\ProgramData\Autodesk\Revit\Addins\2026\Torsion\&quot; /y&#xD;&#xA;xcopy $(ProjectDir)\Torsion.25.addin &quot;C:\ProgramData\Autodesk\Revit\Addins\2026\&quot; /y" />
+	  <Exec Command="xcopy $(TargetPath) &quot;D:\Code\References\&quot; /y&#xD;&#xA;xcopy &quot;D:\Code\References\$(TargetFileName)&quot; &quot;C:\ProgramData\Autodesk\Revit\Addins\2025\Torsion\&quot; /y&#xD;&#xA;xcopy $(ProjectDir)\Torsion.25.addin &quot;C:\ProgramData\Autodesk\Revit\Addins\2025\&quot; /y" />
 	</Target>
 
 </Project>

@@ -36,6 +36,13 @@ namespace Torsion.Ribbon
               .SetLargeImage("Button100x100.png");
             #endregion
 
+            #region Tools
+            RibbonPanelTools.AddPushButton<RevitLinksReloadAll>("Reload Links")
+                .SetAvailabilityClass<DocumentActive>()
+                .SetToolTip("Reloads all currently loaded Revit Link Types")
+                .SetLargeImage("Reload.png");
+            #endregion
+
             #region Settings
             RibbonPanelSettings.AddPushButton<About>("About")
                 .SetAvailabilityClass<DocumentActive>()

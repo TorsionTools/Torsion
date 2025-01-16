@@ -23,7 +23,7 @@ namespace Torsion.Abstracts
         /// </summary>
         internal ElementSet Elements { get; private set; } = default;
         /// <summary>
-        /// This sets the default Result to Succeeded so you don't need to manually set this unless you need a difderent value
+        /// This sets the default Result to Succeeded so you don't need to manually set this unless you need a different value
         /// </summary>
         internal Result Result { get; set; } = Result.Succeeded;
         /// <summary>
@@ -46,7 +46,7 @@ namespace Torsion.Abstracts
                 //Call the Override Execute() method
                 Execute();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 //Set the default result to Failed when there is an Exception caught
                 Result = Result.Failed;

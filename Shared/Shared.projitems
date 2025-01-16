@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\About.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\HelloWorld.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\RevitLinksReloadAll.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DocumentExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ElementIdExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
@@ -38,6 +39,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Images\Reload.png" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\SquareT.png" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\Icon.ico" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\Button100x100.png" />

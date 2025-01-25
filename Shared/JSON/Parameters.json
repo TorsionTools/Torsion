@@ -1,12 +1,29 @@
-﻿[
+﻿{
+  "parameterGroups": [
     {
-        "description": "",
-        "code": "",
-        "model": ""
+      "name": "Torsion",
+      "parameters": [
+        {
+          "description": "Parameter 1 description",
+          "code": "P1",
+          "model": "Model_P1"
+        },
+        {
+          "description": "Parameter 2 description",
+          "code": "P2",
+          "model": "Model_P2"
+        }
+      ]
     },
     {
-        "description": "",
-        "code": "",
-        "model": ""
+      "name": "Custom 1",
+      "parameters": [
+        {
+          "description": "Custom 1 Description",
+          "code": "Custom_1",
+          "model": "Model_Custom_1"
+        }
+      ]
     }
-]
+  ]
+}

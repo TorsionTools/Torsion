@@ -24,6 +24,7 @@
         <Setter Property="CanUserResizeRows" Value="False"/>
         <Setter Property="RowHeaderWidth" Value="0"/>
         <Setter Property="GridLinesVisibility" Value="None"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
         <Style.Resources>
             <Style TargetType="Border">
                 <Setter Property="CornerRadius" Value="8"/>

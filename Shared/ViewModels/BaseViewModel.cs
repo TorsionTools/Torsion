@@ -13,8 +13,8 @@ namespace Torsion.ViewModels
         #region  Properties
         internal System.Windows.Window Win { get; set; }
         internal Autodesk.Revit.DB.Document Doc { get; set; }
-        internal Autodesk.Revit.UI.UIApplication uiApp { get; set; }
-        public string WindowTitle { get; set; }
+        internal Autodesk.Revit.UI.UIApplication UIApp { get; set; }
+        public string Title { get; set; }
         public string Icon { get; set; } = $"pack://application:,,,/{AppVars.AssemblyName};component/Images/Icon.ico";
         #endregion
 
@@ -29,7 +29,7 @@ namespace Torsion.ViewModels
         #region Command Helpers
         protected static async Task RunCommand(Expression<Func<bool>> updatingFlag, Func<Task> action)
         {
-            if (updatingFlag.GetPropertyValue())
+            if(updatingFlag.GetPropertyValue())
             {
                 return;
             }

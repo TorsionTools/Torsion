@@ -20,7 +20,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ParameterExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\RibbonExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\MappedParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BaseModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MappedGroups.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MappedParameterGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SheetItem.cs" />
+    <Compile Include="..\Shared\Models\MappedParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ribbon\Ribbon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ribbon\RibbonAvailability.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Updaters\ViewSheetUpdater.cs" />
@@ -34,8 +38,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Parameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutVM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewSchedulePlaceOnMultipleSheetsVM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ViewSchedulePlaceOnMultipleSheets.xaml.cs">
+      <DependentUpon>ViewSchedulePlaceOnMultipleSheets.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\ViewSchedulePlaceOnMultipleSheets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

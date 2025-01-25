@@ -38,7 +38,7 @@ namespace Torsion.ViewModels
             //Reference to the Document passed from the Command
             Doc = doc;
             //Window Title binding for the Title property of the View
-            WindowTitle = $"About {Build}";
+            Title = $"About {Build}";
             //Set the ICommands to the Method with RelayCommand
             CloseCommand = new RelayCommand(OnClose);
             //Set Properties

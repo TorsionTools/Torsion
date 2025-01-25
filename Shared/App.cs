@@ -250,7 +250,7 @@ namespace Torsion
         /// </summary>
         private static void GetDefaultSettings()
         {
-            AppVars.ParameterMappings = Content.GetFromJSON<MappedParameter>("Parameters");
+            AppVars.ParameterMappings = Content.GetFromJSON<Models.MappedParameter>("Parameters");
         }
         #endregion
     }

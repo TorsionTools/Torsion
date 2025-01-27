@@ -21,12 +21,13 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border Padding="10">
+    <Border Padding="10 10 10 0">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition />
                 <RowDefinition Height="30"/>
+                <RowDefinition x:Name="Footer" Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -40,7 +41,7 @@
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox Checked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -64,6 +65,7 @@
             <Button Content="Cancel" Command="{Binding CloseCMD}" Style="{StaticResource DefaultButton}" Margin="5 0"/>
                 <Button Content="OK" Command="{Binding OkCMD}" Style="{StaticResource DefaultButton}" Margin="5 0"/>
             </StackPanel>
+            <TextBlock Grid.Row="3" Text="{Binding Version, FallbackValue=Version}" Style="{StaticResource FooterText}" HorizontalAlignment="Center"/>
         </Grid>
     </Border>
 </Window>

@@ -14,6 +14,7 @@ namespace Torsion.ViewModels
         internal System.Windows.Window Win { get; set; }
         internal Autodesk.Revit.DB.Document Doc { get; set; }
         internal Autodesk.Revit.UI.UIApplication UIApp { get; set; }
+        public static string Version => AppVars.Version;
         public string Title { get; set; }
         public string Icon { get; set; } = $"pack://application:,,,/{AppVars.AssemblyName};component/Images/Icon.ico";
         #endregion

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Selection;
 
 namespace Torsion.Extensions
 {
@@ -76,5 +78,12 @@ namespace Torsion.Extensions
             return null;
         }
 #endif
+        public static Reference PickElement<Filter>(this Document document, string prompt)
+            where Filter : class, ISelectionFilter, new()
+        {
+            UIDocument uidoc = new UIDocument(document);
+            Selection picked = uidoc.Selection;
+            return picked.PickObject(ObjectType.Element, new Filter(), prompt);
+        }
     }
 }

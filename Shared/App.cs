@@ -3,7 +3,6 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Events;
 using Torsion.Extensions;
-using Torsion.Models;
 using Torsion.Utils;
 
 namespace Torsion
@@ -23,7 +22,7 @@ namespace Torsion
 
             //Add an event handler that will do something when the Document has finished Synchronizing
             RevitApplication.ControlledApplication.DocumentSynchronizedWithCentral += new EventHandler<Autodesk.Revit.DB.Events.DocumentSynchronizedWithCentralEventArgs>(Application_DocumentSynchronized);
-
+            RevitApplication.Idling += new EventHandler<IdlingEventArgs>(Application_Idling);
             //Store the UI Controlled Application for Disabling and Enabling Updaters
             AppVars.uiControlledApp = RevitApplication;
 
@@ -57,6 +56,11 @@ namespace Torsion
 
         #region Application Events
         //Do somethind when a Document is opening
+        private void Application_Idling(object sender, IdlingEventArgs args)
+        {
+
+        }
+        //Do somethind when a Document is opening
         private void Application_DocumentOpening(object sender, Autodesk.Revit.DB.Events.DocumentOpeningEventArgs args)
         {
         }
@@ -83,7 +87,7 @@ namespace Torsion
         {
             //Here we will the bool switch to make sure the first execution does not reset the binding
             //but will run on the second after we have set the bool to false
-            if (!idleCheck)
+            if(!idleCheck)
             {
                 //Reset the command binding so that the next time the button is pressed it will do the same thing
                 //The "Name" could be a variable so that this method is more flexible
@@ -105,7 +109,7 @@ namespace Torsion
             RevitCommandId rCommandId = RevitCommandId.LookupCommandId(name);
             //Make sure the Command can have a binding, and that another application hasn't already bound to it.
             //Command can only have One binding for all add-ins
-            if (rCommandId.CanHaveBinding && !rCommandId.HasBinding)
+            if(rCommandId.CanHaveBinding && !rCommandId.HasBinding)
             {
                 //Set the Method that the bound command will execute when a user "presses" the button on the Ribbon
                 uiApp.CreateAddInCommandBinding(rCommandId).Executed += new EventHandler<ExecutedEventArgs>(this.DisableCommand);
@@ -122,7 +126,7 @@ namespace Torsion
         //This method just asks the user to verify this is what they want to do. It then attaches to an Idling event to add the binding back
         private void DisableCommand(object sender, ExecutedEventArgs args)
         {
-            if (TaskDialog.Show("Contine?", "The use of this Command is not recommended.\nDo you want to proceed anyway?", TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No, TaskDialogResult.No) == TaskDialogResult.Yes)
+            if(TaskDialog.Show("Contine?", "The use of this Command is not recommended.\nDo you want to proceed anyway?", TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No, TaskDialogResult.No) == TaskDialogResult.Yes)
             {
                 //Get the active Document
                 Document doc = args.ActiveDocument;
@@ -167,7 +171,7 @@ namespace Torsion
             }
 
             //Catch any exceptions and present them to the User
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ex.Show("Register Updaters");
                 return Result.Failed;
@@ -190,7 +194,7 @@ namespace Torsion
                 return Result.Succeeded;
             }
             //Catch any exceptions and present them to the User
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ex.Show("Unregister Updaters");
                 return Result.Failed;
@@ -213,7 +217,7 @@ namespace Torsion
                 return Result.Succeeded;
             }
             //Catch any exceptions and present them to the User
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ex.Show("Enable Updaters");
                 return Result.Failed;
@@ -236,7 +240,7 @@ namespace Torsion
                 return Result.Succeeded;
             }
             //Catch any exceptions and present them to the User
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ex.Show("Disable Updaters");
                 return Result.Failed;

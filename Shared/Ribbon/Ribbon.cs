@@ -36,11 +36,19 @@ namespace Torsion.Ribbon
               .SetLargeImage("Button100x100.png");
             #endregion
 
+            #region Sheets
+            RibbonPanelSheets.AddPushButton<ViewSchedulePlaceOnMultipleSheets>("Place Schedules")
+                .SetAvailabilityClass<DocumentActive>()
+                .SetToolTip("Place a Schedule on one or more Sheets")
+                .SetLargeImage("ViewScheduleCopy.png");
+            #endregion
+
             #region Tools
             RibbonPanelTools.AddPushButton<RevitLinksReloadAll>("Reload Links")
                 .SetAvailabilityClass<DocumentActive>()
                 .SetToolTip("Reloads all currently loaded Revit Link Types")
                 .SetLargeImage("Reload.png");
+
             #endregion
 
             #region Settings

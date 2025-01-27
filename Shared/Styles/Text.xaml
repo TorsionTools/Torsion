@@ -29,4 +29,13 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="{x:Type TextBlock}" x:Key="FooterText" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}"/>
+        <Setter Property="Margin" Value="0 5 0 5"/>
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
+        <Setter Property="Foreground" Value="{StaticResource TorsionLightGreyBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
 </ResourceDictionary>

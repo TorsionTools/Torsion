@@ -16,16 +16,21 @@ namespace Torsion.Utils
         /// <typeparam name="T">Specify the Type of Class to return</typeparam>
         /// <param name="fileName"><see cref="string"/> value for the file name.</param>
         /// <returns><see cref="List{TModel}"/></returns>
-        /// <remarks>The file name does not need an extension and will look for Json files in %Assembly Path%\Json\</remarks>
+        /// <remarks>The file name does not need an extension and will look for Json files in %Assembly Path%\Content\</remarks>
         internal static List<TModel> GetFromJSON<TModel>(string fileName) where TModel : class
         {
             //Get the Path relative to the Executing Assembly
-            string jsonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $@"JSON\{fileName}.json");
+#if NET8_0_OR_GREATER
+            string cleanedPath = fileName.Replace(".json", "", System.StringComparison.OrdinalIgnoreCase);
+#else
+            string cleanedPath = fileName.ToLower().Replace(".json", "");
+#endif
+            string jsonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $@"Content\{fileName}.json");
             //Check to make sure the file exists at the path provided
-            if (File.Exists(jsonPath))
+            if(File.Exists(jsonPath))
             {
                 //Open and read the file with the path using a Stream Reader object
-                using (StreamReader reader = new StreamReader(jsonPath))
+                using(StreamReader reader = new StreamReader(jsonPath))
                 {
                     //Read the contents of the file to a string
                     string raw = reader.ReadToEnd();

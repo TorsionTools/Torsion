@@ -20,7 +20,7 @@ namespace Torsion.Updaters
         public ViewSheetUpdater(AddInId appId)
         {
             applicationId = appId;
-            updaterId = new UpdaterId(appId, new Guid("{43E53779-B69B-45D0-9738-10849182A182}"));
+            updaterId = new UpdaterId(applicationId, new Guid("{43E53779-B69B-45D0-9738-10849182A182}"));
         }
 
         /// <summary>

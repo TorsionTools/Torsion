@@ -3,6 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Events;
 using Torsion.Extensions;
+using Torsion.Updaters;
 using Torsion.Utils;
 
 namespace Torsion
@@ -55,12 +56,12 @@ namespace Torsion
         #endregion
 
         #region Application Events
-        //Do somethind when a Document is opening
+        //Do something when a Document is Idling
         private void Application_Idling(object sender, IdlingEventArgs args)
         {
-
+            AppVars.uiApplication = sender as UIApplication;
+            AppVars.uiControlledApp.Idling -= Application_Idling;
         }
-        //Do somethind when a Document is opening
         private void Application_DocumentOpening(object sender, Autodesk.Revit.DB.Events.DocumentOpeningEventArgs args)
         {
         }
@@ -68,6 +69,7 @@ namespace Torsion
         //Do Something when the Document has finished opening
         private void Application_DocumentOpened(object sender, Autodesk.Revit.DB.Events.DocumentOpenedEventArgs args)
         {
+            RegisterDocumentTriggers(args.Document);
         }
 
         //Do something when the Document is Closing
@@ -151,12 +153,12 @@ namespace Torsion
         /// </summary>
         /// <param name="RevitApplication"></param>
         /// <returns></returns>
-        private Result RegisterUpdaters(UIControlledApplication RevitApplication)
+        private static void RegisterUpdaters(UIControlledApplication RevitApplication)
         {
             try
             {
                 //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
-                Updaters.ViewSheetUpdater viewSheetUpdater = new Updaters.ViewSheetUpdater(RevitApplication.ActiveAddInId);
+                ViewSheetUpdater viewSheetUpdater = new ViewSheetUpdater(RevitApplication.ActiveAddInId);
                 //Register the Updater for this Session of Revit. The IsOption bool at the end allows the modifications of the updater to persist even if another user
                 //doesnt have the same add-in (For paid / propriatary add-in like Autodesk Subcription itsm)
                 UpdaterRegistry.RegisterUpdater(viewSheetUpdater, true);
@@ -165,16 +167,19 @@ namespace Torsion
                 //Add a trigger to the Updater so Revit knows When to execute the Updater. Here it is set for Element Addition
                 //which is when a new sheet is created.
                 UpdaterRegistry.AddTrigger(viewSheetUpdater.GetUpdaterId(), viewSheetFilter, Element.GetChangeTypeElementAddition());
-                //This Method is set up as a Result becuase you may need to Unregister and Re-Register the updaters for other portions of the App and
-                //it is good to know if it all worked or not
-                return Result.Succeeded;
-            }
 
+                DoorUpdater doorUpdater = new DoorUpdater(RevitApplication.ActiveAddInId);
+                UpdaterRegistry.RegisterUpdater(doorUpdater, true);
+                ElementClassFilter elementClassFilter = new ElementClassFilter(typeof(FamilyInstance));
+                ElementCategoryFilter elementCategoryFilter = new ElementCategoryFilter(BuiltInCategory.OST_Doors);
+                LogicalAndFilter logicalAndFilter = new LogicalAndFilter(elementClassFilter, elementCategoryFilter);
+                UpdaterRegistry.AddTrigger(doorUpdater.GetUpdaterId(), logicalAndFilter, Element.GetChangeTypeElementAddition());
+                UpdaterRegistry.AddTrigger(doorUpdater.GetUpdaterId(), logicalAndFilter, Element.GetChangeTypeGeometry());
+            }
             //Catch any exceptions and present them to the User
             catch(Exception ex)
             {
                 ex.Show("Register Updaters");
-                return Result.Failed;
             }
         }
         /// <summary>
@@ -182,22 +187,19 @@ namespace Torsion
         /// </summary>
         /// <param name="RevitApplication"></param>
         /// <returns></returns>
-        private Result UnregisterUpdaters(UIControlledApplication RevitApplication)
+        private static void UnregisterUpdaters(UIControlledApplication RevitApplication)
         {
             try
             {
                 //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
-                Updaters.ViewSheetUpdater viewSheetUpdater = new Updaters.ViewSheetUpdater(RevitApplication.ActiveAddInId);
+                ViewSheetUpdater viewSheetUpdater = new ViewSheetUpdater(RevitApplication.ActiveAddInId);
                 //Unregister the Updater from the Updater Registry using the UpdaterId
                 UpdaterRegistry.UnregisterUpdater(viewSheetUpdater.GetUpdaterId());
-                //Return the result
-                return Result.Succeeded;
             }
             //Catch any exceptions and present them to the User
             catch(Exception ex)
             {
                 ex.Show("Unregister Updaters");
-                return Result.Failed;
             }
         }
         /// <summary>
@@ -205,52 +207,101 @@ namespace Torsion
         /// </summary>
         /// <param name="RevitApplication"></param>
         /// <returns></returns>
-        internal static Result EnableUpdaters(UIControlledApplication RevitApplication)
+        internal static void EnableUpdaters(UIControlledApplication RevitApplication, string updaterName)
         {
             try
             {
-                //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
-                Updaters.ViewSheetUpdater viewSheetUpdater = new Updaters.ViewSheetUpdater(RevitApplication.ActiveAddInId);
-                //Enable the updater once it is registered, or if it has been disabled by another Method or Class programatically
-                UpdaterRegistry.EnableUpdater(viewSheetUpdater.GetUpdaterId());
-                //Return the result
-                return Result.Succeeded;
+#if NET8_0_OR_GREATER
+                switch(updaterName)
+                {
+                    case nameof(ViewSheetUpdater) or "all":
+                        //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
+                        ViewSheetUpdater viewSheetUpdater = new ViewSheetUpdater(RevitApplication.ActiveAddInId);
+                        //Enable the updater once it is registered, or if it has been disabled by another Method or Class programatically
+                        UpdaterRegistry.EnableUpdater(viewSheetUpdater.GetUpdaterId());
+                        break;
+                    case nameof(DoorUpdater) or "all":
+                        DoorUpdater doorUpdater = new DoorUpdater(RevitApplication.ActiveAddInId);
+                        UpdaterRegistry.EnableUpdater(doorUpdater.GetUpdaterId());
+                        break;
+                }
+#else
+                if(updaterName == nameof(ViewSheetUpdater) || updaterName == "all")
+                {
+                    //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
+                    Updaters.ViewSheetUpdater viewSheetUpdater = new Updaters.ViewSheetUpdater(RevitApplication.ActiveAddInId);
+                    //Enable the updater once it is registered, or if it has been disabled by another Method or Class programatically
+                    UpdaterRegistry.EnableUpdater(viewSheetUpdater.GetUpdaterId());
+                }
+#endif
             }
-            //Catch any exceptions and present them to the User
+            //Catch any exceptions and present to the User
             catch(Exception ex)
             {
                 ex.Show("Enable Updaters");
-                return Result.Failed;
             }
         }
         /// <summary>
         /// Disable Dynamic Model Updaters within the Current Session of Revit. This is useful when another tool may be stopped or interupted by an Updater
         /// </summary>
-        /// <param name="RevitApplication"></param>
+        /// <param name="RevitApplication"><see cref="UIControlledApplication"/></param>
         /// <returns></returns>
-        internal static Result DisableUpdaters(UIControlledApplication RevitApplication)
+        internal static void DisableUpdaters(UIControlledApplication RevitApplication, string updaterName)
         {
             try
             {
-                //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
-                Updaters.ViewSheetUpdater sheetUpdater = new Updaters.ViewSheetUpdater(RevitApplication.ActiveAddInId);
-                //Disable the updater. It will not execute again until it is Enabled
-                UpdaterRegistry.DisableUpdater(sheetUpdater.GetUpdaterId());
-                //Return the Result
-                return Result.Succeeded;
+#if NET8_0_OR_GREATER
+                switch(updaterName)
+                {
+                    case nameof(ViewSheetUpdater) or "all":
+                        //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
+                        ViewSheetUpdater sheetUpdater = new ViewSheetUpdater(RevitApplication.ActiveAddInId);
+                        //Disable the updater. It will not execute again until it is Enabled
+                        UpdaterRegistry.DisableUpdater(sheetUpdater.GetUpdaterId());
+                        break;
+                }
+#else
+                if(updaterName == nameof(ViewSheetUpdater) || updaterName == "all")
+                {
+                    //Create a new instance of the ViewSheetUpdater Class and Pass the ActiveAddInId for this Application
+                    Updaters.ViewSheetUpdater sheetUpdater = new Updaters.ViewSheetUpdater(RevitApplication.ActiveAddInId);
+                    //Disable the updater. It will not execute again until it is Enabled
+                    UpdaterRegistry.DisableUpdater(sheetUpdater.GetUpdaterId());
+                }
+#endif
             }
             //Catch any exceptions and present them to the User
             catch(Exception ex)
             {
                 ex.Show("Disable Updaters");
-                return Result.Failed;
+            }
+        }
+        /// <summary>
+        /// Register Triggers for the Updater if the Shared Parameters exist in the Opened Document
+        /// </summary>
+        /// <param name="doc"><see cref="Document"/></param>
+        private static void RegisterDocumentTriggers(Document doc)
+        {
+            //Check to see if the Shared Parameter by GUID exists in the Document
+            if(SharedParameterElement.Lookup(doc, new Guid("Shared-Param-Guid")) is SharedParameterElement sharedParameterElement)
+            {
+                //Check to see if the Shared Parameter has an Internal Definition
+                if(sharedParameterElement.GetDefinition() is InternalDefinition internalDefinition)
+                {
+                    DoorUpdater doorUpdater = new DoorUpdater(doc.Application.ActiveAddInId);
+                    ElementClassFilter elementClassFilter = new ElementClassFilter(typeof(FamilyInstance));
+                    ElementCategoryFilter elementCategoryFilter = new ElementCategoryFilter(BuiltInCategory.OST_Doors);
+                    LogicalAndFilter logicalAndFilter = new LogicalAndFilter(elementClassFilter, elementCategoryFilter);
+                    //Add a trigger to the Updater so Revit knows When to execute the Updater. Here it is set for changes to the Shared Parameter
+                    UpdaterRegistry.AddTrigger(doorUpdater.GetUpdaterId(), logicalAndFilter, Element.GetChangeTypeParameter(internalDefinition.Id));
+                }
             }
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// 
+        /// This method will get the Defaults for the Add-In including Parameter Mappings and other settings
         /// </summary>
         private static void GetDefaultSettings()
         {

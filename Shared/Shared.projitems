@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\MappedGroups.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MappedParameterGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SheetItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Updaters\DoorUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\SelectionFilters.cs" />
     <Compile Include="..\Shared\Models\MappedParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Ribbon\Ribbon.cs" />
@@ -49,6 +50,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\SharedParameters.txt" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\Reload.png" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\SquareT.png" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\Icon.ico" />
@@ -71,7 +73,7 @@
     <Resource Include="$(MSBuildThisFileDirectory)Images\ViewLegendCopy100x100.png" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\ViewScheduleCopy.png" />
     <Resource Include="$(MSBuildThisFileDirectory)Images\Warning100x100.png" />
-    <Content Include="$(MSBuildThisFileDirectory)JSON\Parameters.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Parameters.json" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Buttons.xaml">
